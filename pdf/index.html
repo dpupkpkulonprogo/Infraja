@@ -1,0 +1,71 @@
+<?php
+$path = '.';
+$files = array_diff(scandir($path), array('.', '..'));
+
+function formatSize($bytes) {
+    if ($bytes >= 1073741824) return number_format($bytes / 1073741824, 2) . ' GB';
+    if ($bytes >= 1048576)   return number_format($bytes / 1048576, 2) . ' MB';
+    if ($bytes >= 1024)      return number_format($bytes / 1024, 2) . ' KB';
+    return $bytes . ' B';
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Directory Listing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+    body { font-family: 'Inter', sans-serif; background: #f4f6f9; margin: 0; padding: 40px; color: #333; }
+    .container { max-width: 900px; margin: auto; background: #fff; border-radius: 12px;
+        padding: 30px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    h1 { margin: 0; font-weight: 600; text-align: center; font-size: 28px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 25px; }
+    th { text-align: left; padding-bottom: 12px; border-bottom: 2px solid #e6e6e6; color: #555; font-size: 14px; }
+    td { padding: 14px 0; border-bottom: 1px solid #f0f0f0; font-size: 15px; }
+    a { text-decoration: none; color: #0074ff; font-weight: 500; }
+    tr:hover td { background: #fafafa; }
+    .footer { margin-top: 25px; text-align: center; color: #888; font-size: 13px; }
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Directory Listing</h1>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Last Modified</th>
+            <th>Size</th>
+        </tr>
+
+        <tr>
+            <td><a href="../">⬅ Parent Directory</a></td>
+            <td>–</td>
+            <td>–</td>
+        </tr>
+
+        <?php foreach ($files as $file): 
+            $isDir = is_dir($file);
+            $mtime = date("Y-m-d H:i", filemtime($file));
+            $size = $isDir ? '–' : formatSize(filesize($file));
+        ?>
+        <tr>
+            <td>
+                <a href="<?= $file ?>">
+                    <?= $isDir ? "📁 $file/" : "📄 $file" ?>
+                </a>
+            </td>
+            <td><?= $mtime ?></td>
+            <td><?= $size ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+    <div class="footer">
+        Auto Generated Directory Listing • © <?= date('Y') ?>
+    </div>
+</div>
+</body>
+</html>
