@@ -1,0 +1,50 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 201,
+        "name": "Jl. Kemiri III",
+        "kapanewon": "Pengasih",
+        "panjang_km": 0.86,
+        "lebar_m": 5.0,
+        "hotmix_km": 0.86,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [110.161339, -7.858471],
+          [110.16466, -7.855656]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 202,
+        "name": "Jl. Sugiman",
+        "kapanewon": "Pengasih",
+        "panjang_km": 1.30,
+        "lebar_m": 3.0,
+        "hotmix_km": 1.30,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [110.168058, -7.850160],
+          [110.16084, -7.858355]
+        ]
+      }
+    }
+  ]
+}
+
