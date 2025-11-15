@@ -4,9 +4,22 @@ function normalizeRuasId(id) {
 }
 
 function matchesRuasId(layerRuasId, searchRuasId) {
-  return layerRuasId === searchRuasId || 
-         layerRuasId.includes(searchRuasId) ||
-         searchRuasId.includes(layerRuasId);
+  // Exact match
+  if (layerRuasId === searchRuasId) {
+    return true;
+  }
+  
+  // Extract base number (e.g., "242" from "242.0", "242.1", "242.2")
+  var layerBase = layerRuasId.split('.')[0];
+  var searchBase = searchRuasId.split('.')[0];
+  
+  // Match if base numbers are the same (e.g., "242" matches "242.0", "242.1", "242.2")
+  if (layerBase === searchBase && layerBase !== '') {
+    return true;
+  }
+  
+  // Contains match (fallback)
+  return layerRuasId.includes(searchRuasId) || searchRuasId.includes(layerRuasId);
 }
 
 function getRuasIdFromLayer(layer) {
@@ -153,16 +166,26 @@ function getOSRMRoute(start, end, callback) {
   var url = 'https://router.project-osrm.org/route/v1/driving/' + coordinates + '?overview=full&geometries=geojson';
   
   fetch(url)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('HTTP ' + res.status);
+      }
+      return res.json();
+    })
     .then(data => {
       if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-        callback(data.routes[0].geometry.coordinates);
+        var routeCoords = data.routes[0].geometry.coordinates;
+        console.log('OSRM: Route found with', routeCoords.length, 'points');
+        callback(routeCoords);
       } else {
+        console.warn('OSRM: No route found. Code:', data.code);
+        // Fallback to straight line
         callback([start, end]);
       }
     })
     .catch(err => {
-      console.error('OSRM error:', err);
+      console.warn('OSRM error:', err.message || err);
+      // Fallback to straight line
       callback([start, end]);
     });
 }
@@ -239,7 +262,7 @@ fetch('jalan-kp.json')
     
     map.on('zoomend', zoomUpdateHandler);
     
-    data.features.forEach(function(feature) {
+    data.features.forEach(function(feature, index) {
       if (feature.geometry.type === 'LineString' && feature.geometry.coordinates.length >= 2) {
         var coords = feature.geometry.coordinates;
         var props = feature.properties;
@@ -249,10 +272,31 @@ fetch('jalan-kp.json')
         var pangkalLonLat = coords[0];
         var ujungLonLat = coords[coords.length - 1];
         
-        getOSRMRoute(pangkalLonLat, ujungLonLat, function(routeCoords) {
-          var leafletCoords = routeCoords.map(function(coord) {
+        // Only use OSRM routing if ruasId is specified in URL
+        // Otherwise, use coordinates directly from GeoJSON (straight line)
+        if (normalizedRuasId && matchesRuasId(normalizeRuasId(noRuas), normalizedRuasId)) {
+          // User is viewing specific ruasId - use OSRM routing
+          console.log('Using OSRM routing for ruasId:', noRuas);
+          getOSRMRoute(pangkalLonLat, ujungLonLat, function(routeCoords) {
+            var leafletCoords = routeCoords.map(function(coord) {
+              return [coord[1], coord[0]];
+            });
+            createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer);
+          });
+        } else if (!normalizedRuasId) {
+          // No ruasId specified - use coordinates directly (straight line)
+          var leafletCoords = coords.map(function(coord) {
             return [coord[1], coord[0]];
           });
+          createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer);
+        } else {
+          // ruasId specified but doesn't match - skip this feature
+          return;
+        }
+      }
+    });
+    
+    function createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer) {
           
           var currentZoom = map.getZoom();
           var lineStyle = getLineStyle(currentZoom);
@@ -385,9 +429,7 @@ fetch('jalan-kp.json')
             titikLayer.addLayer(ujungMarker);
             removeFromMap(ujungMarker);
           }
-        });
-      }
-    });
+    }
 
     setTimeout(function() {
       var layerControl = L.control.layers(baseMaps, { 
@@ -507,4 +549,3 @@ fetch('jalan-kp.json')
     }, searchDelay);
   })
   .catch(err => console.error('Gagal load GeoJSON Jalan:', err));
-
