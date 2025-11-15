@@ -1,20 +1,33 @@
+/* ============================================================================
+   RESET & BASE STYLES
+   ============================================================================ */
+
 html, body { 
   height: 100%; 
   margin: 0; 
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 #map { 
   width: 100%; 
   height: 100vh; 
+  position: relative;
 }
 
 #map.hidden { 
   opacity: 0; 
   visibility: hidden; 
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
+/* ============================================================================
+   POPUP STYLES
+   ============================================================================ */
 
 .popup-content { 
   max-width: 300px; 
+  min-width: 200px;
 }
 
 .popup-title { 
@@ -22,6 +35,7 @@ html, body {
   font-weight: bold; 
   margin-bottom: 10px; 
   color: #2c3e50; 
+  line-height: 1.4;
 }
 
 .popup-detail { 
@@ -32,12 +46,13 @@ html, body {
 
 .popup-detail strong { 
   color: #2c3e50; 
+  font-weight: 600;
 }
 
 .popup-simple {
   font-size: 14px;
   line-height: 1.8;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  min-width: 180px;
 }
 
 .popup-simple .popup-field {
@@ -100,6 +115,10 @@ html, body {
   }
 }
 
+/* ============================================================================
+   MARKER STYLES
+   ============================================================================ */
+
 .custom-marker-icon {
   background: transparent;
   border: none;
@@ -108,6 +127,7 @@ html, body {
 .marker-container {
   position: relative;
   text-align: center;
+  cursor: pointer;
 }
 
 .marker-pin {
@@ -121,6 +141,12 @@ html, body {
   margin: 0 auto;
   cursor: pointer;
   transform-origin: center center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.marker-pin:hover {
+  transform: rotate(-45deg) scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
 .marker-pin.pangkal {

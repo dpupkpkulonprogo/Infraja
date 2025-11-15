@@ -1,4 +1,7 @@
-// Helper functions
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
 function normalizeRuasId(id) {
   return String(id || '').replace(/\s+/g, '').toLowerCase();
 }
@@ -12,14 +15,16 @@ function matchesRuasId(layerRuasId, searchRuasId) {
   // Extract base number (e.g., "242" from "242.0", "242.1", "242.2")
   var layerBase = layerRuasId.split('.')[0];
   var searchBase = searchRuasId.split('.')[0];
+  var searchHasDecimal = searchRuasId.includes('.');
+  var searchIsBaseZero = searchRuasId === searchBase + '.0';
   
-  // Match if base numbers are the same (e.g., "242" matches "242.0", "242.1", "242.2")
-  if (layerBase === searchBase && layerBase !== '') {
-    return true;
+  if (searchHasDecimal && !searchIsBaseZero) {
+    // Specific decimal (e.g., "242.2") - only exact match
+    return false;
+  } else {
+    // No decimal (e.g., "242") or "242.0" - match all variants with same base
+    return layerBase === searchBase && layerBase !== '';
   }
-  
-  // Contains match (fallback)
-  return layerRuasId.includes(searchRuasId) || searchRuasId.includes(layerRuasId);
 }
 
 function getRuasIdFromLayer(layer) {
@@ -40,11 +45,10 @@ function setLayerVisible(layer, visible) {
       layer.addTo(map);
     }
     if (layer.setStyle) {
-      if (layer instanceof L.Polyline) {
-        layer.setStyle({ opacity: 0.9, fillOpacity: 0.9 });
-      } else {
-        layer.setStyle({ opacity: 0.9 });
-      }
+      var style = layer instanceof L.Polyline 
+        ? { opacity: 0.9, fillOpacity: 0.9 }
+        : { opacity: 0.9 };
+      layer.setStyle(style);
     }
     if (layer.setOpacity) {
       layer.setOpacity(1);
@@ -57,11 +61,15 @@ function setLayerVisible(layer, visible) {
   }
 }
 
-// Initialize
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
+
 const urlParams = new URLSearchParams(window.location.search);
 const ruasId = urlParams.get('ruasId');
 const normalizedRuasId = ruasId ? normalizeRuasId(decodeURIComponent(ruasId).replace(/\+/g, ' ').trim()) : null;
 
+// Initialize map
 var map;
 if (ruasId) {
   document.getElementById('map').classList.add('hidden');
@@ -70,6 +78,7 @@ if (ruasId) {
   map = L.map('map').setView([-7.826, 110.156], 12);
 }
 
+// Base map layers
 var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; OpenStreetMap contributors'
@@ -89,6 +98,12 @@ var baseMaps = {
   "Satelit": satelit,
   "Terrain": terrain
 };
+
+var titikLayer = L.layerGroup().addTo(map);
+
+// ============================================================================
+// POPUP & MARKER FUNCTIONS
+// ============================================================================
 
 function formatJalanPopup(properties) {
   var html = '<div class="popup-content">' +
@@ -131,12 +146,11 @@ function formatJalanPopup(properties) {
 }
 
 function createMarkerIcon(noRuas, namaRuas, jenis) {
-  var displayLabel = noRuas ? noRuas : (namaRuas || 'Ruas');
-  var tooltipText = (namaRuas ? namaRuas : 'Ruas') + ' (Titik ' + jenis + ')';
-  tooltipText = tooltipText.replace(/"/g, '&quot;');
+  var displayLabel = noRuas || namaRuas || 'Ruas';
+  var tooltipText = (namaRuas || 'Ruas') + ' (Titik ' + jenis + ')';
   var pinClass = jenis.toLowerCase();
   
-  var html = '<div class="marker-container" title="' + tooltipText + '">' +
+  var html = '<div class="marker-container" title="' + tooltipText.replace(/"/g, '&quot;') + '">' +
     '<div class="marker-pin ' + pinClass + '"></div>' +
     '<div class="marker-label ' + pinClass + '">' + displayLabel + '</div>' +
     '</div>';
@@ -150,6 +164,23 @@ function createMarkerIcon(noRuas, namaRuas, jenis) {
   });
 }
 
+function createMarkerPopup(noRuas, namaRuas, jenis, props, coord) {
+  var popupId = 'popup-' + jenis.toLowerCase() + '-' + noRuas;
+  return '<div class="popup-simple" id="' + popupId + '">' +
+    '<div class="popup-field"><span class="popup-label">No</span>: ' + noRuas + '</div>' +
+    '<div class="popup-field"><span class="popup-label">Nama</span>: ' + namaRuas + ' (Titik ' + jenis + ')</div>' +
+    '<a class="detail-link" onclick="toggleDetail(\'' + popupId + '\')">Detail</a>' +
+    '<div class="detail-content" id="' + popupId + '-detail">' +
+    '<strong>Kapanewon:</strong> ' + (props.kapanewon || '-') + '<br />' +
+    '<strong>Kalurahan:</strong> ' + (props.kalurahan || '-') + '<br />' +
+    '<strong>Panjang:</strong> ' + (props.panjang_km || '-') + ' km<br />' +
+    '<strong>Lebar:</strong> ' + (props.lebar_m || '-') + ' m<br />' +
+    '<br /><strong>Koordinat:</strong><br />' +
+    'Latitude: ' + coord[0].toFixed(6) + '<br />' +
+    'Longitude: ' + coord[1].toFixed(6) +
+    '</div></div>';
+}
+
 function toggleDetail(popupId) {
   var detailElement = document.getElementById(popupId + '-detail');
   if (detailElement) {
@@ -159,7 +190,9 @@ function toggleDetail(popupId) {
 
 window.toggleDetail = toggleDetail;
 
-var titikLayer = L.layerGroup().addTo(map);
+// ============================================================================
+// ROUTING FUNCTIONS
+// ============================================================================
 
 function getOSRMRoute(start, end, callback) {
   var coordinates = start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1];
@@ -179,16 +212,18 @@ function getOSRMRoute(start, end, callback) {
         callback(routeCoords);
       } else {
         console.warn('OSRM: No route found. Code:', data.code);
-        // Fallback to straight line
         callback([start, end]);
       }
     })
     .catch(err => {
       console.warn('OSRM error:', err.message || err);
-      // Fallback to straight line
       callback([start, end]);
     });
 }
+
+// ============================================================================
+// MAIN DATA LOADING
+// ============================================================================
 
 fetch('jalan-kp.json')
   .then(res => res.json())
@@ -196,7 +231,9 @@ fetch('jalan-kp.json')
     var jalanLayer = L.layerGroup().addTo(map);
     var allPolylines = [];
     var allArrowDecorators = [];
+    var osrmRequestCount = 0;
     
+    // Style functions
     function getLineStyle(zoom) {
       if (zoom >= 16) return { weight: 3, opacity: 0.8 };
       if (zoom >= 14) return { weight: 4, opacity: 0.85 };
@@ -211,6 +248,7 @@ fetch('jalan-kp.json')
       return { pixelSize: 14, weight: 2.5, repeat: '12%' };
     }
     
+    // Zoom update handler
     var zoomUpdateHandler = function() {
       var newZoom = map.getZoom();
       var newLineStyle = getLineStyle(newZoom);
@@ -254,7 +292,6 @@ fetch('jalan-kp.json')
           newDecorator._polyline = decoratorInfo.polyline;
           newDecorator._ruasId = decoratorInfo.ruasId;
           jalanLayer.addLayer(newDecorator);
-          
           decoratorInfo.decorator = newDecorator;
         }
       });
@@ -262,72 +299,128 @@ fetch('jalan-kp.json')
     
     map.on('zoomend', zoomUpdateHandler);
     
-<<<<<<< HEAD
-    // Count how many features will use OSRM (for logging)
-    var osrmRequestCount = 0;
+    // Create route polyline and markers
+    function createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat) {
+      var currentZoom = map.getZoom();
+      var lineStyle = getLineStyle(currentZoom);
+      
+      // Create polyline
+      var routePolyline = L.polyline(leafletCoords, {
+        color: '#ff6b35',
+        weight: lineStyle.weight,
+        opacity: lineStyle.opacity,
+        lineCap: 'round',
+        lineJoin: 'round'
+      });
+      
+      routePolyline._ruasId = noRuas;
+      routePolyline.feature = { properties: props };
+      allPolylines.push(routePolyline);
+      routePolyline.bindPopup(formatJalanPopup(props));
+      
+      // Create arrow decorator
+      var arrowDecorator = null;
+      if (typeof L.polylineDecorator !== 'undefined') {
+        var arrowStyle = getArrowStyle(currentZoom);
+        arrowDecorator = L.polylineDecorator(routePolyline, {
+          patterns: [{
+            offset: '10%',
+            repeat: arrowStyle.repeat,
+            symbol: L.Symbol.arrowHead({
+              pixelSize: arrowStyle.pixelSize,
+              polygon: false,
+              pathOptions: {
+                stroke: true,
+                fillColor: '#ff6b35',
+                fillOpacity: 0.9,
+                color: '#ff6b35',
+                weight: arrowStyle.weight,
+                opacity: 0.9
+              }
+            })
+          }]
+        });
+        arrowDecorator._polyline = routePolyline;
+        arrowDecorator._ruasId = noRuas;
+        jalanLayer.addLayer(arrowDecorator);
+        
+        allArrowDecorators.push({
+          decorator: arrowDecorator,
+          polyline: routePolyline,
+          ruasId: noRuas
+        });
+      }
+      
+      jalanLayer.addLayer(routePolyline);
+      
+      // Filter visibility
+      var shouldAddToMap = !normalizedRuasId || matchesRuasId(normalizeRuasId(noRuas), normalizedRuasId);
+      if (!shouldAddToMap) {
+        routePolyline.setStyle({ opacity: 0, fillOpacity: 0, weight: 0 });
+        removeFromMap(routePolyline);
+        if (arrowDecorator) {
+          arrowDecorator.setStyle({ opacity: 0 });
+          removeFromMap(arrowDecorator);
+        }
+      }
+      
+      // Create markers
+      function createMarker(coord, jenis) {
+        var markerCoord = [coord[1], coord[0]];
+        var icon = createMarkerIcon(noRuas, namaRuas, jenis);
+        var marker = L.marker(markerCoord, { icon: icon, draggable: false });
+        marker._ruasId = noRuas;
+        
+        var popup = createMarkerPopup(noRuas, namaRuas, jenis, props, markerCoord);
+        marker.bindPopup(popup);
+        
+        var shouldAddMarker = !normalizedRuasId || matchesRuasId(normalizeRuasId(noRuas), normalizedRuasId);
+        if (shouldAddMarker) {
+          titikLayer.addLayer(marker);
+        } else {
+          titikLayer.addLayer(marker);
+          removeFromMap(marker);
+        }
+      }
+      
+      createMarker(pangkalLonLat, "Pangkal");
+      createMarker(ujungLonLat, "Ujung");
+    }
     
-=======
->>>>>>> a2c85900fd93b135f47dbe8d4e4258f0a0f38782
-    data.features.forEach(function(feature, index) {
+    // Process features
+    data.features.forEach(function(feature) {
       if (feature.geometry.type === 'LineString' && feature.geometry.coordinates.length >= 2) {
         var coords = feature.geometry.coordinates;
         var props = feature.properties;
         var namaRuas = props.name || props.Nama_Ruas || "Ruas Jalan";
         var noRuas = props.no_ruas !== undefined && props.no_ruas !== null ? props.no_ruas : "";
-        
         var pangkalLonLat = coords[0];
         var ujungLonLat = coords[coords.length - 1];
         
-<<<<<<< HEAD
-        // Only use OSRM routing if ruasId is specified in URL AND matches this feature
-        // Otherwise, use coordinates directly from GeoJSON (straight line)
         if (normalizedRuasId) {
           // Check if this feature matches the requested ruasId
           var normalizedNoRuas = normalizeRuasId(noRuas);
           if (matchesRuasId(normalizedNoRuas, normalizedRuasId)) {
-            // User is viewing specific ruasId - use OSRM routing (ONLY for matching features)
+            // Use OSRM routing for matching features
             osrmRequestCount++;
             console.log('OSRM Request #' + osrmRequestCount + ' for ruasId:', noRuas);
             getOSRMRoute(pangkalLonLat, ujungLonLat, function(routeCoords) {
               var leafletCoords = routeCoords.map(function(coord) {
                 return [coord[1], coord[0]];
               });
-              createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer);
+              createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat);
             });
           }
-          // If ruasId specified but doesn't match - skip this feature (no request, no display)
         } else {
-          // No ruasId specified - use coordinates directly (straight line, NO OSRM request)
-=======
-        // Only use OSRM routing if ruasId is specified in URL
-        // Otherwise, use coordinates directly from GeoJSON (straight line)
-        if (normalizedRuasId && matchesRuasId(normalizeRuasId(noRuas), normalizedRuasId)) {
-          // User is viewing specific ruasId - use OSRM routing
-          console.log('Using OSRM routing for ruasId:', noRuas);
-          getOSRMRoute(pangkalLonLat, ujungLonLat, function(routeCoords) {
-            var leafletCoords = routeCoords.map(function(coord) {
-              return [coord[1], coord[0]];
-            });
-            createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer);
-          });
-        } else if (!normalizedRuasId) {
-          // No ruasId specified - use coordinates directly (straight line)
->>>>>>> a2c85900fd93b135f47dbe8d4e4258f0a0f38782
+          // No ruasId - use coordinates directly (straight line, NO OSRM request)
           var leafletCoords = coords.map(function(coord) {
             return [coord[1], coord[0]];
           });
-          createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer);
-<<<<<<< HEAD
-=======
-        } else {
-          // ruasId specified but doesn't match - skip this feature
-          return;
->>>>>>> a2c85900fd93b135f47dbe8d4e4258f0a0f38782
+          createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat);
         }
       }
     });
     
-<<<<<<< HEAD
     // Log summary
     if (normalizedRuasId) {
       console.log('Total OSRM requests:', osrmRequestCount, 'for ruasId:', ruasId);
@@ -335,143 +428,7 @@ fetch('jalan-kp.json')
       console.log('No OSRM requests - using straight lines for all features');
     }
     
-=======
->>>>>>> a2c85900fd93b135f47dbe8d4e4258f0a0f38782
-    function createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer) {
-          
-          var currentZoom = map.getZoom();
-          var lineStyle = getLineStyle(currentZoom);
-          var routePolyline = L.polyline(leafletCoords, {
-            color: '#ff6b35',
-            weight: lineStyle.weight,
-            opacity: lineStyle.opacity,
-            lineCap: 'round',
-            lineJoin: 'round'
-          });
-          
-          routePolyline._ruasId = noRuas;
-          routePolyline.feature = { properties: props };
-          allPolylines.push(routePolyline);
-          routePolyline.bindPopup(formatJalanPopup(props));
-          
-          var arrowDecorator = null;
-          if (typeof L.polylineDecorator !== 'undefined') {
-            var arrowStyle = getArrowStyle(currentZoom);
-            arrowDecorator = L.polylineDecorator(routePolyline, {
-              patterns: [{
-                offset: '10%',
-                repeat: arrowStyle.repeat,
-                symbol: L.Symbol.arrowHead({
-                  pixelSize: arrowStyle.pixelSize,
-                  polygon: false,
-                  pathOptions: {
-                    stroke: true,
-                    fillColor: '#ff6b35',
-                    fillOpacity: 0.9,
-                    color: '#ff6b35',
-                    weight: arrowStyle.weight,
-                    opacity: 0.9
-                  }
-                })
-              }]
-            });
-            arrowDecorator._polyline = routePolyline;
-            arrowDecorator._ruasId = noRuas;
-            jalanLayer.addLayer(arrowDecorator);
-            
-            allArrowDecorators.push({
-              decorator: arrowDecorator,
-              polyline: routePolyline,
-              ruasId: noRuas
-            });
-          }
-          
-          jalanLayer.addLayer(routePolyline);
-          
-          var shouldAddToMap = !normalizedRuasId || matchesRuasId(normalizeRuasId(noRuas), normalizedRuasId);
-          if (!shouldAddToMap) {
-            routePolyline.setStyle({ opacity: 0, fillOpacity: 0, weight: 0 });
-            removeFromMap(routePolyline);
-            if (arrowDecorator) {
-              arrowDecorator.setStyle({ opacity: 0 });
-              removeFromMap(arrowDecorator);
-            }
-          }
-          
-          var pangkalCoord = [pangkalLonLat[1], pangkalLonLat[0]];
-          var pangkalIcon = createMarkerIcon(noRuas, namaRuas, "Pangkal");
-          var pangkalMarker = L.marker(pangkalCoord, { 
-            icon: pangkalIcon,
-            draggable: false
-          });
-          pangkalMarker._ruasId = noRuas;
-          
-          var pangkalPopupId = 'popup-pangkal-' + noRuas;
-          var pangkalPopup = '<div class="popup-simple" id="' + pangkalPopupId + '">' +
-            '<div class="popup-field">' +
-            '<span class="popup-label">No</span>: ' + noRuas +
-            '</div>' +
-            '<div class="popup-field">' +
-            '<span class="popup-label">Nama</span>: ' + namaRuas + ' (Titik Pangkal)' +
-            '</div>' +
-            '<a class="detail-link" onclick="toggleDetail(\'' + pangkalPopupId + '\')">Detail</a>' +
-            '<div class="detail-content" id="' + pangkalPopupId + '-detail">' +
-            '<strong>Kapanewon:</strong> ' + (props.kapanewon || '-') + '<br />' +
-            '<strong>Kalurahan:</strong> ' + (props.kalurahan || '-') + '<br />' +
-            '<strong>Panjang:</strong> ' + (props.panjang_km || '-') + ' km<br />' +
-            '<strong>Lebar:</strong> ' + (props.lebar_m || '-') + ' m<br />' +
-            '<br /><strong>Koordinat:</strong><br />' +
-            'Latitude: ' + pangkalCoord[0].toFixed(6) + '<br />' +
-            'Longitude: ' + pangkalCoord[1].toFixed(6) +
-            '</div>' +
-            '</div>';
-          
-          var shouldAddMarker = !normalizedRuasId || matchesRuasId(normalizeRuasId(noRuas), normalizedRuasId);
-          pangkalMarker.bindPopup(pangkalPopup);
-          if (shouldAddMarker) {
-            titikLayer.addLayer(pangkalMarker);
-          } else {
-            titikLayer.addLayer(pangkalMarker);
-            removeFromMap(pangkalMarker);
-          }
-          
-          var ujungCoord = [ujungLonLat[1], ujungLonLat[0]];
-          var ujungIcon = createMarkerIcon(noRuas, namaRuas, "Ujung");
-          var ujungMarker = L.marker(ujungCoord, { 
-            icon: ujungIcon,
-            draggable: false
-          });
-          ujungMarker._ruasId = noRuas;
-          
-          var ujungPopupId = 'popup-ujung-' + noRuas;
-          var ujungPopup = '<div class="popup-simple" id="' + ujungPopupId + '">' +
-            '<div class="popup-field">' +
-            '<span class="popup-label">No</span>: ' + noRuas +
-            '</div>' +
-            '<div class="popup-field">' +
-            '<span class="popup-label">Nama</span>: ' + namaRuas + ' (Titik Ujung)' +
-            '</div>' +
-            '<a class="detail-link" onclick="toggleDetail(\'' + ujungPopupId + '\')">Detail</a>' +
-            '<div class="detail-content" id="' + ujungPopupId + '-detail">' +
-            '<strong>Kapanewon:</strong> ' + (props.kapanewon || '-') + '<br />' +
-            '<strong>Kalurahan:</strong> ' + (props.kalurahan || '-') + '<br />' +
-            '<strong>Panjang:</strong> ' + (props.panjang_km || '-') + ' km<br />' +
-            '<strong>Lebar:</strong> ' + (props.lebar_m || '-') + ' m<br />' +
-            '<br /><strong>Koordinat:</strong><br />' +
-            'Latitude: ' + ujungCoord[0].toFixed(6) + '<br />' +
-            'Longitude: ' + ujungCoord[1].toFixed(6) +
-            '</div>' +
-            '</div>';
-          
-          ujungMarker.bindPopup(ujungPopup);
-          if (shouldAddMarker) {
-            titikLayer.addLayer(ujungMarker);
-          } else {
-            titikLayer.addLayer(ujungMarker);
-            removeFromMap(ujungMarker);
-          }
-    }
-
+    // Layer control and filtering
     setTimeout(function() {
       var layerControl = L.control.layers(baseMaps, { 
         "Ruas Jalan": jalanLayer,
@@ -479,7 +436,7 @@ fetch('jalan-kp.json')
       }, { collapsed: false }).addTo(map);
 
       if (normalizedRuasId) {
-        function filterLayerGroup(layerGroup, isMarker) {
+        function filterLayerGroup(layerGroup) {
           layerGroup.eachLayer(function(layer) {
             var noRuas = getRuasIdFromLayer(layer);
             if (noRuas !== undefined && noRuas !== null) {
@@ -494,8 +451,8 @@ fetch('jalan-kp.json')
           });
         }
         
-        jalanLayer._filterByRuasId = function() { filterLayerGroup(jalanLayer, false); };
-        titikLayer._filterByRuasId = function() { filterLayerGroup(titikLayer, true); };
+        jalanLayer._filterByRuasId = function() { filterLayerGroup(jalanLayer); };
+        titikLayer._filterByRuasId = function() { filterLayerGroup(titikLayer); };
         
         map.on('overlayadd', function(e) {
           if (e.layer === jalanLayer) jalanLayer._filterByRuasId();
@@ -503,6 +460,7 @@ fetch('jalan-kp.json')
         });
       }
 
+      // Auto-fit bounds for overview
       if (!ruasId && jalanLayer.getLayers().length > 0) {
         var visibleLayers = [];
         jalanLayer.eachLayer(function(layer) {
@@ -520,9 +478,11 @@ fetch('jalan-kp.json')
       }
     }, 2000);
 
+    // Search and display matching features
     var searchDelay = ruasId ? 1000 : 2500;
     setTimeout(function() {
       if (!ruasId) {
+        // Overview mode - show all
         jalanLayer.eachLayer(function(layer) {
           if (layer.setStyle) layer.setStyle({ opacity: 0.9, fillOpacity: 0.9 });
         });
@@ -530,6 +490,7 @@ fetch('jalan-kp.json')
           marker.setOpacity(1);
         });
       } else {
+        // Detail mode - show only matching ruasId
         var matchedLayers = [];
         var matchedMarkers = [];
 
@@ -553,10 +514,7 @@ fetch('jalan-kp.json')
           }
         }
 
-        jalanLayer.eachLayer(function(layer) {
-          processLayer(layer);
-        });
-
+        jalanLayer.eachLayer(processLayer);
         titikLayer.eachLayer(function(marker) {
           var noRuas = marker._ruasId;
           if (noRuas !== undefined && noRuas !== null) {
@@ -570,21 +528,20 @@ fetch('jalan-kp.json')
           }
         });
 
+        // Fit bounds and show popup
         var found = matchedLayers.length > 0 || matchedMarkers.length > 0;
-
+        if (ruasId) document.getElementById('map').classList.remove('hidden');
+        
         if (found && matchedLayers.length > 0) {
           var allMatched = new L.featureGroup(matchedLayers);
           map.fitBounds(allMatched.getBounds(), { padding: [30, 30], maxZoom: 18 });
-          if (ruasId) document.getElementById('map').classList.remove('hidden');
           matchedLayers[0].openPopup();
         } else if (found && matchedMarkers.length > 0) {
           var markerBounds = L.latLngBounds(matchedMarkers.map(function(m) { return m.getLatLng(); }));
           map.fitBounds(markerBounds, { padding: [30, 30], maxZoom: 18 });
-          if (ruasId) document.getElementById('map').classList.remove('hidden');
           matchedMarkers[0].openPopup();
         } else {
           console.warn('Nomor ruas tidak ditemukan:', ruasId);
-          if (ruasId) document.getElementById('map').classList.remove('hidden');
         }
       }
     }, searchDelay);
