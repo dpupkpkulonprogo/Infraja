@@ -262,9 +262,12 @@ fetch('jalan-kp.json')
     
     map.on('zoomend', zoomUpdateHandler);
     
+<<<<<<< HEAD
     // Count how many features will use OSRM (for logging)
     var osrmRequestCount = 0;
     
+=======
+>>>>>>> a2c85900fd93b135f47dbe8d4e4258f0a0f38782
     data.features.forEach(function(feature, index) {
       if (feature.geometry.type === 'LineString' && feature.geometry.coordinates.length >= 2) {
         var coords = feature.geometry.coordinates;
@@ -275,6 +278,7 @@ fetch('jalan-kp.json')
         var pangkalLonLat = coords[0];
         var ujungLonLat = coords[coords.length - 1];
         
+<<<<<<< HEAD
         // Only use OSRM routing if ruasId is specified in URL AND matches this feature
         // Otherwise, use coordinates directly from GeoJSON (straight line)
         if (normalizedRuasId) {
@@ -294,14 +298,36 @@ fetch('jalan-kp.json')
           // If ruasId specified but doesn't match - skip this feature (no request, no display)
         } else {
           // No ruasId specified - use coordinates directly (straight line, NO OSRM request)
+=======
+        // Only use OSRM routing if ruasId is specified in URL
+        // Otherwise, use coordinates directly from GeoJSON (straight line)
+        if (normalizedRuasId && matchesRuasId(normalizeRuasId(noRuas), normalizedRuasId)) {
+          // User is viewing specific ruasId - use OSRM routing
+          console.log('Using OSRM routing for ruasId:', noRuas);
+          getOSRMRoute(pangkalLonLat, ujungLonLat, function(routeCoords) {
+            var leafletCoords = routeCoords.map(function(coord) {
+              return [coord[1], coord[0]];
+            });
+            createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer);
+          });
+        } else if (!normalizedRuasId) {
+          // No ruasId specified - use coordinates directly (straight line)
+>>>>>>> a2c85900fd93b135f47dbe8d4e4258f0a0f38782
           var leafletCoords = coords.map(function(coord) {
             return [coord[1], coord[0]];
           });
           createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer);
+<<<<<<< HEAD
+=======
+        } else {
+          // ruasId specified but doesn't match - skip this feature
+          return;
+>>>>>>> a2c85900fd93b135f47dbe8d4e4258f0a0f38782
         }
       }
     });
     
+<<<<<<< HEAD
     // Log summary
     if (normalizedRuasId) {
       console.log('Total OSRM requests:', osrmRequestCount, 'for ruasId:', ruasId);
@@ -309,6 +335,8 @@ fetch('jalan-kp.json')
       console.log('No OSRM requests - using straight lines for all features');
     }
     
+=======
+>>>>>>> a2c85900fd93b135f47dbe8d4e4258f0a0f38782
     function createRoutePolyline(leafletCoords, props, noRuas, namaRuas, pangkalLonLat, ujungLonLat, jalanLayer, allPolylines, allArrowDecorators, normalizedRuasId, titikLayer) {
           
           var currentZoom = map.getZoom();
