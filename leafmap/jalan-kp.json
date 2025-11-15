@@ -4,12 +4,13 @@
     {
       "type": "Feature",
       "properties": {
-        "no_ruas": 201,
+        "no_ruas": 201.0,
         "name": "Jl. Kemiri III",
         "kapanewon": "Pengasih",
-        "panjang_km": 0.86,
+        "kalurahan": "Margosari, Wates",
+        "panjang_km": 0.856,
         "lebar_m": 5.0,
-        "hotmix_km": 0.86,
+        "hotmix_km": 0.856,
         "lapen_makadam_km": 0.0,
         "beton_km": 0.0,
         "kerikil_km": 0.0,
@@ -18,20 +19,27 @@
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [110.161339, -7.858471],
-          [110.16466, -7.855656]
+          [
+            110.161339,
+            -7.858471
+          ],
+          [
+            110.164663,
+            -7.855656
+          ]
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "no_ruas": 202,
+        "no_ruas": 202.0,
         "name": "Jl. Sugiman",
         "kapanewon": "Pengasih",
-        "panjang_km": 1.30,
+        "kalurahan": "Pengasih, Wates",
+        "panjang_km": 1.3,
         "lebar_m": 3.0,
-        "hotmix_km": 1.30,
+        "hotmix_km": 1.3,
         "lapen_makadam_km": 0.0,
         "beton_km": 0.0,
         "kerikil_km": 0.0,
@@ -40,11 +48,1379 @@
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [110.168058, -7.850160],
-          [110.16084, -7.858355]
+          [
+            110.168058,
+            -7.85016
+          ],
+          [
+            110.160846,
+            -7.858355
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 203.0,
+        "name": "Bulu - Clereng",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Pengasih, Sendangsari",
+        "panjang_km": 2.207,
+        "lebar_m": 4.45,
+        "hotmix_km": 2.207,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.16663,
+            -7.841991
+          ],
+          [
+            110.161977,
+            -7.824238
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 204.0,
+        "name": "Bulu - Lingkar Pengasih I",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Pengasih",
+        "panjang_km": 0.49,
+        "lebar_m": 4.0,
+        "hotmix_km": 0.49,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.162817,
+            -7.843087
+          ],
+          [
+            110.166472,
+            -7.84335
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 205.0,
+        "name": "Bulu - Lingkar Pengasih II",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Pengasih",
+        "panjang_km": 0.231,
+        "lebar_m": 4.0,
+        "hotmix_km": 0.231,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.166472,
+            -7.84335
+          ],
+          [
+            110.168566,
+            -7.843491
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 206.0,
+        "name": "Bulu - Lingkar Pengasih III",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Pengasih",
+        "panjang_km": 0.385,
+        "lebar_m": 4.0,
+        "hotmix_km": 0.385,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.168566,
+            -7.843491
+          ],
+          [
+            110.170726,
+            -7.842212
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 207.0,
+        "name": "Cemetuk - Kemiri",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Kedungsari, Kaliagung",
+        "panjang_km": 3.311,
+        "lebar_m": 2.89,
+        "hotmix_km": 1.52,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 1.791,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.191569,
+            -7.864851
+          ],
+          [
+            110.195917,
+            -7.842217
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 208.0,
+        "name": "Clereng - Girinyono",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sendangsari",
+        "panjang_km": 3.14,
+        "lebar_m": 3.76,
+        "hotmix_km": 3.14,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.162159,
+            -7.82135
+          ],
+          [
+            110.139348,
+            -7.811024
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 209.0,
+        "name": "Clereng - Kutogiri",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sendangsari, Sidomulyo",
+        "panjang_km": 5.55,
+        "lebar_m": 4.72,
+        "hotmix_km": 0.954,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 4.596,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.161951,
+            -7.824243
+          ],
+          [
+            110.147945,
+            -7.78668
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 210.0,
+        "name": "Cumetuk - Jrangking",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Kedungsari, Kaliagung",
+        "panjang_km": 3.35,
+        "lebar_m": 2.94,
+        "hotmix_km": 2.6,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.75,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.186298,
+            -7.865586
+          ],
+          [
+            110.19071,
+            -7.838541
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 211.0,
+        "name": "Dayakan - Pengasih",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Pengasih",
+        "panjang_km": 1.143,
+        "lebar_m": 3.0,
+        "hotmix_km": 1.143,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.168201,
+            -7.848097
+          ],
+          [
+            110.170616,
+            -7.843631
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 212.0,
+        "name": "Gebangan - Tunjungan",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Pengasih",
+        "panjang_km": 1.43,
+        "lebar_m": 4.5,
+        "hotmix_km": 1.43,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.154818,
+            -7.841541
+          ],
+          [
+            110.153702,
+            -7.852847
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 213.0,
+        "name": "Gemulung - Beji",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Karangsari, Hargowilis",
+        "panjang_km": 4.446,
+        "lebar_m": 5.06,
+        "hotmix_km": 4.177,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.269,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.12532,
+            -7.829219
+          ],
+          [
+            110.14733,
+            -7.856241
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 214.0,
+        "name": "Gemulung - Clereng",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sendangsari, Karangsari",
+        "panjang_km": 4.21,
+        "lebar_m": 3.4,
+        "hotmix_km": 2.535,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 1.675,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.134275,
+            -7.830865
+          ],
+          [
+            110.161942,
+            -7.824234
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 215.0,
+        "name": "Girinyono - Soka",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sendangsari, Hargowilis",
+        "panjang_km": 3.785,
+        "lebar_m": 3.0,
+        "hotmix_km": 3.785,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.139349,
+            -7.81101
+          ],
+          [
+            110.119104,
+            -7.812497
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 216.0,
+        "name": "Gondangan - Pendem",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sidomulyo",
+        "panjang_km": 4.275,
+        "lebar_m": 3.12,
+        "hotmix_km": 4.275,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.148607,
+            -7.792112
+          ],
+          [
+            110.165305,
+            -7.805858
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 217.0,
+        "name": "Gondangan - Sidomulyo",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sidomulyo",
+        "panjang_km": 1.61,
+        "lebar_m": 3.0,
+        "hotmix_km": 1.61,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.148651,
+            -7.792149
+          ],
+          [
+            110.1583,
+            -7.800404
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 218.0,
+        "name": "Gunung Gondang - Jrangking",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari, Kaliagung",
+        "panjang_km": 5.0,
+        "lebar_m": 3.28,
+        "hotmix_km": 5.0,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.18123,
+            -7.862558
+          ],
+          [
+            110.187107,
+            -7.829464
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 219.0,
+        "name": "Jl. Sawo",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Wates",
+        "panjang_km": 0.363,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.363,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.148174,
+            -7.850656
+          ],
+          [
+            110.148351,
+            -7.84755
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 220.0,
+        "name": "Jombokan - Trukan Kulon",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Kedundang, Demen, Kulur",
+        "panjang_km": 1.36,
+        "lebar_m": 4.0,
+        "hotmix_km": 1.36,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.10891,
+            -7.88394
+          ],
+          [
+            110.097385,
+            -7.880863
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 221.0,
+        "name": "Kalinangka - Cerme",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Kedungsari, Giripeni, Cerme",
+        "panjang_km": 2.414,
+        "lebar_m": 3.0,
+        "hotmix_km": 2.414,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.176536,
+            -7.86694
+          ],
+          [
+            110.175014,
+            -7.884953
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 222.0,
+        "name": "Karangtengah Kidul - Karangtengah Lor I",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari",
+        "panjang_km": 0.685,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.685,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.174198,
+            -7.85691
+          ],
+          [
+            110.173228,
+            -7.853127
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 223.0,
+        "name": "Karangtengah Kidul - Karangtengah Lor II",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari",
+        "panjang_km": 0.625,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.625,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.17422,
+            -7.858709
+          ],
+          [
+            110.172771,
+            -7.856792
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 224.0,
+        "name": "Karangtengah Lor - Kalipetir Kidul II",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari",
+        "panjang_km": 0.871,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.871,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.174268,
+            -7.856944
+          ],
+          [
+            110.180462,
+            -7.855108
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 225.0,
+        "name": "Kasatrian - Margosari",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari, Kedungsari",
+        "panjang_km": 0.906,
+        "lebar_m": 7.0,
+        "hotmix_km": 0.211,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.695,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.174976,
+            -7.866737
+          ],
+          [
+            110.174282,
+            -7.858803
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 226.0,
+        "name": "Kepek - Serang",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Pengasih, Sendangsari",
+        "panjang_km": 1.1,
+        "lebar_m": 4.64,
+        "hotmix_km": 0.0,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 1.1,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.17552,
+            -7.836794
+          ],
+          [
+            110.167303,
+            -7.835916
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 227.0,
+        "name": "Kopat - Anjir",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Karangsari, Hargorejo",
+        "panjang_km": 2.376,
+        "lebar_m": 4.0,
+        "hotmix_km": 2.376,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.142589,
+            -7.857857
+          ],
+          [
+            110.124113,
+            -7.851281
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 228.0,
+        "name": "Kopat - Sendang",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Karangsari",
+        "panjang_km": 0.92,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.92,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.134589,
+            -7.847011
+          ],
+          [
+            110.134989,
+            -7.855018
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 229.0,
+        "name": "Kroco - Sendangsari",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sendangsari",
+        "panjang_km": 2.8,
+        "lebar_m": 3.0,
+        "hotmix_km": 2.8,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.146953,
+            -7.839446
+          ],
+          [
+            110.165779,
+            -7.835524
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 230.0,
+        "name": "Margosari - Kepek",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Pengasih, Margosari",
+        "panjang_km": 2.2,
+        "lebar_m": 4.45,
+        "hotmix_km": 1.462,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.738,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.174182,
+            -7.853633
+          ],
+          [
+            110.176475,
+            -7.836131
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 231.0,
+        "name": "Menggungan - Ngulakan",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Tawangsari, Hargorejo",
+        "panjang_km": 1.266,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.8,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.466,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.125795,
+            -7.880863
+          ],
+          [
+            110.125614,
+            -7.869977
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 232.0,
+        "name": "Milir - Krembangan",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Kedungsari, Krembangan",
+        "panjang_km": 3.54,
+        "lebar_m": 4.0,
+        "hotmix_km": 3.54,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.190165,
+            -7.868861
+          ],
+          [
+            110.19082,
+            -7.898392
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 233.0,
+        "name": "Mrunggi - Ngripung",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sendangsari",
+        "panjang_km": 1.544,
+        "lebar_m": 3.0,
+        "hotmix_km": 1.469,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.075,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.152004,
+            -7.827495
+          ],
+          [
+            110.164629,
+            -7.832438
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 234.0,
+        "name": "Pagutan - Sambiroto",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sendangsari, Donomulyo, Banyuroto",
+        "panjang_km": 4.5,
+        "lebar_m": 3.11,
+        "hotmix_km": 4.5,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.171245,
+            -7.834946
+          ],
+          [
+            110.169458,
+            -7.81529
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 235.0,
+        "name": "Sawahaking - Giripurwo",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sidomulyo, Giripurwo",
+        "panjang_km": 3.15,
+        "lebar_m": 4.02,
+        "hotmix_km": 3.15,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.154362,
+            -7.794754
+          ],
+          [
+            110.174707,
+            -7.783503
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 236.0,
+        "name": "Sawahaking - Mancetan",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sidomulyo, Jatimulyo",
+        "panjang_km": 4.38,
+        "lebar_m": 3.0,
+        "hotmix_km": 3.414,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.966,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.165308,
+            -7.789722
+          ],
+          [
+            110.152961,
+            -7.761215
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 237.0,
+        "name": "Sendangsari - Mrunggi",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sendangsari",
+        "panjang_km": 1.039,
+        "lebar_m": 3.0,
+        "hotmix_km": 1.039,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.16435,
+            -7.831706
+          ],
+          [
+            110.154986,
+            -7.828555
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 238.0,
+        "name": "Suruhan - Blumbang",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Sendangsari, Karangsari",
+        "panjang_km": 2.127,
+        "lebar_m": 3.0,
+        "hotmix_km": 2.127,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.140242,
+            -7.838073
+          ],
+          [
+            110.148036,
+            -7.827724
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 239.0,
+        "name": "Tambak - Kulur",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Karangsari, Hargorejo",
+        "panjang_km": 3.3,
+        "lebar_m": 4.0,
+        "hotmix_km": 2.5,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.8,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.13904,
+            -7.856611
+          ],
+          [
+            110.110661,
+            -7.874679
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 240.0,
+        "name": "Tegalrejo - Beji",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Karangsari, Wates, Pengasih",
+        "panjang_km": 1.138,
+        "lebar_m": 3.0,
+        "hotmix_km": 1.138,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.15449,
+            -7.853238
+          ],
+          [
+            110.146772,
+            -7.858057
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 241.0,
+        "name": "Triharjo - Ngestiharjo",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Wates",
+        "panjang_km": 2.612,
+        "lebar_m": 3.0,
+        "hotmix_km": 2.612,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.142041,
+            -7.870742
+          ],
+          [
+            110.140441,
+            -7.893297
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 242.1,
+        "name": "Jl. Kemiri I A",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari, Wates",
+        "panjang_km": 0.935,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.935,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.161341,
+            -7.860065
+          ],
+          [
+            110.167719,
+            -7.85899
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 242.2,
+        "name": "Jl. Kemiri I B",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari",
+        "panjang_km": 0.265,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.265,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.163312,
+            -7.860403
+          ],
+          [
+            110.16484,
+            -7.859618
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 243.0,
+        "name": "Kriyanan - Kemiri I",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari",
+        "panjang_km": 0.2,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.2,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.165084,
+            -7.860886
+          ],
+          [
+            110.165602,
+            -7.859331
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 244.0,
+        "name": "Jalan Rusunawa Triharjo",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Wates",
+        "panjang_km": 0.175,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.11,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.065,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.132271,
+            -7.870614
+          ],
+          [
+            110.135978,
+            -7.871448
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 245.0,
+        "name": "Jl. Kemiri II",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari",
+        "panjang_km": 0.168,
+        "lebar_m": 3.88,
+        "hotmix_km": 0.148,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.02,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.16336,
+            -7.85668
+          ],
+          [
+            110.164093,
+            -7.85754
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 246.0,
+        "name": "Jl. Masjid Kriyanan",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Wates",
+        "panjang_km": 0.392,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.392,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.160889,
+            -7.86153
+          ],
+          [
+            110.163547,
+            -7.862909
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 247.0,
+        "name": "Jl. Tobanan",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari",
+        "panjang_km": 0.675,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.675,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            101.167652,
+            -7.853301
+          ],
+          [
+            110.167719,
+            -7.85897
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "no_ruas": 248.0,
+        "name": "Kriyanan - Kemiri II",
+        "kapanewon": "Pengasih",
+        "kalurahan": "Margosari, Wates",
+        "panjang_km": 0.323,
+        "lebar_m": 3.0,
+        "hotmix_km": 0.323,
+        "lapen_makadam_km": 0.0,
+        "beton_km": 0.0,
+        "kerikil_km": 0.0,
+        "tanah_km": 0.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.165311,
+            -7.862925
+          ],
+          [
+            110.164668,
+            -7.860747
+          ]
         ]
       }
     }
   ]
 }
-
