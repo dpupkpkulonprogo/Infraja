@@ -138,7 +138,7 @@ function formatJalanPopup(properties) {
   }
 
   if (surfaceInfo.length) {
-    html += '<br /><strong>Jenis Permukaan:</strong><br />' + surfaceInfo.join('<br />');
+    html += '<br /><strong>Tipe Permukaan:</strong><br />' + surfaceInfo.join('<br />');
   }
 
   html += '</div></div>';
@@ -547,3 +547,4 @@ fetch('jalan-kp.json')
     }, searchDelay);
   })
   .catch(err => console.error('Gagal load GeoJSON Jalan:', err));
+
